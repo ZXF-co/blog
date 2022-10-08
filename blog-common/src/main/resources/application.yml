@@ -1,0 +1,23 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: blog-common
+  datasource:
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 125728
+    name: blog
+
+mybatis:
+  mapper-locations: classpath:mappers/*xml
+  type-aliases-package: com.work.blogcommon.mybatis.entity
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8082/eureka
+
+
