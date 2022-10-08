@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
+ * Consumer接口实现类
+ *
  * @author zhouxiaofa
  * @date 2022/9/30 13:51
  */

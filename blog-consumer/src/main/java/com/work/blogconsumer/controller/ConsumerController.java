@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 /**
+ * Consumer接口定义类
+ *
  * @author zhouxiaofa
  * @date 2022/9/30 13:40
  */

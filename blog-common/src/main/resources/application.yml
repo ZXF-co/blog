@@ -1,9 +1,9 @@
 server:
-  port: 8002
+  port: 8001
 
 spring:
   application:
-    name: blog-consumer
+    name: blog-common
   datasource:
     url: jdbc:mysql://localhost:3306/blog?serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -12,12 +12,8 @@ spring:
     name: blog
 
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.work.blogconsumer.entity
-
-logging:
-  level:
-    com.work.blogconsumer: debug
+  mapper-locations: classpath:mappers/*xml
+  type-aliases-package: com.work.blogcommon.mybatis.entity
 
 eureka:
   client:

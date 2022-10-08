@@ -3,7 +3,7 @@ package com.work.blogconsumer.mapper;
 import com.work.blogconsumer.entity.Consumer;
 
 /**
- * 用户类数据管理
+ * Consumer数据管理类
  *
  * @author zhouxiaofa
  * @date 2022/9/30 13:46

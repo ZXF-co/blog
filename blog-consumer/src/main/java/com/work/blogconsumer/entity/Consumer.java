@@ -3,7 +3,7 @@ package com.work.blogconsumer.entity;
 import com.work.blogcommon.entity.AbstractEntity;
 
 /**
- * 用户类
+ * Consumer定义类
  *
  * @author zhouxiaofa
  * @date 2022/9/30 13:35

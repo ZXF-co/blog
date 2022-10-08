@@ -21,6 +21,7 @@
         ID, `NAME`, ACCOUNT, PASSWORD, GENDER, PHONE, DESCRIPTION, `STATE`, CREATE_USER_ID, CREATE_USER_NAME, CREATE_DATE
     </sql>
 
+    <!--通过主键ID查询Consumer-->
     <select id="findById" parameterType="java.lang.String" resultMap="baseResultMap">
         SELECT
         <include refid="base_column"/>
@@ -28,6 +29,7 @@
         <include refid="base_table"/>
         WHERE ID=#{id}
     </select>
+
     <!--创建Consumer-->
     <insert id="insertConsumer" keyColumn="ID" keyProperty="id" parameterType="com.work.blogconsumer.entity.Consumer">
         <selectKey order="BEFORE" resultType="java.lang.String" keyProperty="id">
