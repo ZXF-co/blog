@@ -22,6 +22,7 @@
         <module>blog-common</module>
         <module>blog-consumer</module>
         <module>blog-log</module>
+        <module>blog-eureka</module>
     </modules>
 
 </project>
