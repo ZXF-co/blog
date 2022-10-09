@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.work.blogblog.mapper.TagMapper">
+
+    <resultMap id="baseResultMap" type="com.work.blogblog.entity.Tag">
+        <id column="ID" property="id" jdbcType="VARCHAR"></id>
+        <result column="NAME" property="name" jdbcType="VARCHAR"></result>
+        <result column="DESCRIPTION" property="description" jdbcType="VARCHAR"></result>
+        <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR"></result>
+        <result column="STATE" property="state" jdbcType="VARCHAR"></result>
+        <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR"></result>
+        <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"></result>
+        <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"></result>
+    </resultMap>
+
+    <sql id="base_table">tag</sql>
+    <sql id="base_column">
+        ID, `NAME`, DESCRIPTION, PARENT_ID, `STATE`, CREATE_USER_ID, CREATE_USER_NAME, CREATE_DATE
+    </sql>
+
+    <!--根据创建人ID查询其对应的tags-->
+    <select id="findTagList" resultMap="baseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="base_column"/>
+        FROM
+        <include refid="base_table"/>
+        WHERE CREATE_USER_ID=#{createUserId}
+    </select>
+</mapper>
