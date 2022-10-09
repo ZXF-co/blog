@@ -23,6 +23,8 @@
         <module>blog-consumer</module>
         <module>blog-log</module>
         <module>blog-eureka</module>
+        <module>blog-gateway</module>
+        <module>blog-blog</module>
     </modules>
 
 </project>
