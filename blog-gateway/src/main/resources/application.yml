@@ -1,0 +1,26 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: blog-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lower-case-service-id: true
+      routes:
+      - id: blog-consumer
+        uri: lb://blog-consumer
+        predicates:
+          - Path=/consumer1/**
+
+logging:
+  level:
+    com.work.bloggateway: debug
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8082/eureka
