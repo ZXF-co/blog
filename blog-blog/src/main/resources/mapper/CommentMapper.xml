@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.work.blogblog.mapper.CommentMapper">
+
+    <resultMap id="baseResultMap" type="com.work.blogblog.entity.Comment">
+        <id column="ID" property="id" jdbcType="VARCHAR"></id>
+        <result column="BLOG_ID" property="blogId" jdbcType="VARCHAR"></result>
+        <result column="CONTENT" property="content" jdbcType="VARCHAR"></result>
+        <result column="REVIEWER_ID" property="reviewerId" jdbcType="VARCHAR"></result>
+        <result column="REVIEWER_NAME" property="reviewerName" jdbcType="VARCHAR"></result>
+        <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR"></result>
+        <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"></result>
+        <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"></result>
+    </resultMap>
+
+    <sql id="base_table">comment</sql>
+    <sql id="base_column">
+        RDB.ID, RDB.BLOG_ID, RDB.CONTENT, RDB,REVIEWER_ID, RDB.REVIEWER_NAME, RDB.CREATE_USER_ID, RDB.CREATE_USER_NAME, RDB.CREATE_DATE
+    </sql>
+
+    <!--通过id查询评论-->
+    <select id="findById" resultMap="baseResultMap">
+        SELECT
+        <include refid="base_column"/>
+        FROM
+        <include refid="base_table"/>
+        AS RDB
+        WHERE RDB.ID=#{id}
+    </select>
+
+    <!--创建评论-->
+    <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.work.blogblog.entity.Comment">
+        <selectKey order="BEFORE" resultType="java.lang.String" keyProperty="id">
+            SELECT UUID()
+        </selectKey>
+        INSERT INTO
+        <include refid="base_table"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            ID,
+            <if test="blogId != null">
+                BLOG_ID,
+            </if>
+            <if test="content != null">
+                CONTENT,
+            </if>
+            <if test="reviewerId != null">
+                REVIEWER_ID,
+            </if>
+            <if test="reviewerName != null">
+                REVIEWER_NAME,
+            </if>
+            <if test="createUserId != null">
+                CREATE_USER_ID,
+            </if>
+            <if test="createUserName != null">
+                CREATE_USER_NAME,
+            </if>
+            CREATE_DATE,
+            REVISION,
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <choose>
+                <when test="id != null">
+                    #{id},
+                </when>
+                <otherwise>
+                    UUID(),
+                </otherwise>
+            </choose>
+            <if test="blogId != null">
+                #{blogId},
+            </if>
+            <if test="content != null">
+                #{content},
+            </if>
+            <if test="reviewerId != null">
+                #{reviewerId},
+            </if>
+            <if test="reviewerName != null">
+                #{reviewerName},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName},
+            </if>
+            NOW(),
+            #{revision},
+        </trim>
+    </insert>
+
+    <!--通过id更新评论-->
+    <update id="update">
+
+    </update>
+
+    <!--通过id删除评论-->
+    <delete id="delete">
+
+    </delete>
+</mapper>

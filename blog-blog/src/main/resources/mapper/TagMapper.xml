@@ -15,8 +15,33 @@
 
     <sql id="base_table">tag</sql>
     <sql id="base_column">
-        ID, `NAME`, DESCRIPTION, PARENT_ID, `STATE`, CREATE_USER_ID, CREATE_USER_NAME, CREATE_DATE
+        RDB.ID, RDB.`NAME`, RDB.DESCRIPTION, RDB.PARENT_ID, RDB.`STATE`, RDB.CREATE_USER_ID, RDB.CREATE_USER_NAME, RDB.CREATE_DATE
     </sql>
+
+    <!--通过id查询tag-->
+    <select id="findById" resultMap="baseResultMap">
+        SELECT
+        <include refid="base_column"/>
+        FROM
+        <include refid="base_table"/>
+        AS RDB
+        WHERE RDB.ID=#{id}
+    </select>
+
+    <!--创建tag-->
+    <insert id="insert">
+
+    </insert>
+
+    <!--通过id更新tag-->
+    <update id="update">
+
+    </update>
+
+    <!--通过id删除tag-->
+    <delete id="delete">
+
+    </delete>
 
     <!--根据创建人ID查询其对应的tags-->
     <select id="findTagList" resultMap="baseResultMap" parameterType="java.lang.String">

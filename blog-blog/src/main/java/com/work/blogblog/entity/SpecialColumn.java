@@ -3,29 +3,25 @@ package com.work.blogblog.entity;
 import com.work.blogcommon.entity.AbstractEntity;
 
 /**
- * tag(标签)定义类
+ * SpecialColumn(专栏)定义类
  *
  * @author zhouxiaofa
- * @date 2022/10/9 14:55
+ * @date 2022/10/10 13:32
  */
-public class Tag extends AbstractEntity {
+public class SpecialColumn extends AbstractEntity {
 
     /**
-     * 标签主键ID
+     * 主键ID
      */
     private String id;
     /**
-     * 标签名称
+     * 专栏名称
      */
     private String name;
     /**
-     * 标签描述
+     * 专栏描述
      */
     private String description;
-    /**
-     * 标签父ID
-     */
-    private String parentId;
     /**
      * 是否可用状态
      */
@@ -53,14 +49,6 @@ public class Tag extends AbstractEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
     }
 
     public String getState() {
