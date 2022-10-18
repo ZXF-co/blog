@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.work.blogblog.mapper.BlogMapper">
+
+    <resultMap id="baseResultMap" type="com.work.blogblog.entity.Blog">
+        <id column="ID" property="id" jdbcType="VARCHAR"></id>
+        <result column="TITLE" property="title" jdbcType="VARCHAR"></result>
+        <result column="CONTENT" property="content" jdbcType="VARCHAR"></result>
+        <result column="STATE" property="state" jdbcType="VARCHAR"></result>
+        <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR"></result>
+        <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"></result>
+        <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"></result>
+
+        <association property="specialColumn" javaType="com.work.blogblog.entity.SpecialColumn">
+            <id column="SC_ID" property="id" jdbcType="VARCHAR"></id>
+            <result column="SC_NAME" property="name" jdbcType="VARCHAR"></result>
+            <result column="SC_DESCRIPTION" property="description" jdbcType="VARCHAR"></result>
+            <result column="SC_STATE" property="state" jdbcType="VARCHAR"></result>
+            <result column="SC_CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR"></result>
+            <result column="SC_CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"></result>
+            <result column="SC_CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"></result>
+        </association>
+
+        <collection property="tags" ofType="com.work.blogblog.entity.Tag">
+            <id column="T_ID" property="id" jdbcType="VARCHAR"></id>
+            <result column="T_NAME" property="name" jdbcType="VARCHAR"></result>
+            <result column="T_DESCRIPTION" property="description" jdbcType="VARCHAR"></result>
+            <result column="T_PARENT_ID" property="parentId" jdbcType="VARCHAR"></result>
+            <result column="T_STATE" property="state" jdbcType="VARCHAR"></result>
+            <result column="T_CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR"></result>
+            <result column="T_CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"></result>
+            <result column="T_CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"></result>
+        </collection>
+
+        <collection property="pictures" ofType="com.work.blogblog.entity.Picture">
+            <id column="P_ID" property="id" jdbcType="VARCHAR"></id>
+            <result column="P_NAME" property="name" jdbcType="VARCHAR"></result>
+            <result column="P_TYPE" property="type" jdbcType="VARCHAR"></result>
+            <result column="P_URL" property="url" jdbcType="VARCHAR"></result>
+            <result column="P_BLOG_ID" property="blogId" jdbcType="VARCHAR"></result>
+            <result column="P_CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR"></result>
+            <result column="P_CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"></result>
+            <result column="P_CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"></result>
+        </collection>
+
+        <collection property="comments" ofType="com.work.blogblog.entity.Comment">
+            <id column="C_ID" property="id" jdbcType="VARCHAR"></id>
+            <result column="C_BLOG_ID" property="blogId" jdbcType="VARCHAR"></result>
+            <result column="C_CONTENT" property="content" jdbcType="VARCHAR"></result>
+            <result column="C_REVIEWER_ID" property="reviewerId" jdbcType="VARCHAR"></result>
+            <result column="C_REVIEWER_NAME" property="reviewerName" jdbcType="VARCHAR"></result>
+            <result column="C_CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR"></result>
+            <result column="C_CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"></result>
+            <result column="C_CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"></result>
+        </collection>
+    </resultMap>
+
+    <sql id="base_table">blog</sql>
+    <sql id="base_column">
+        RDB.ID, RDB.TITLE, RDB.CONTENT, RDB.STATE, RDB.CREATE_USER_ID, RDB.CREATE_USER_NAME, RDB.CREATE_DATE
+    </sql>
+
+    <sql id="table_special_column">special_column</sql>
+    <sql id="table_special_column_column">
+        SC.ID SC_ID, SC.NAME SC_NAME, SC.DESCRIPTION SC_DESCRIPTION, SC.STATE SC_STATE, SC.CREATE_USER_ID SC_CREATE_USER_ID, SC.CREATE_USER_NAME SC_CREATE_USER_NAME, SC.CREATE_DATE SC_CREATE_DATE
+    </sql>
+
+    <sql id="table_tag">tag</sql>
+    <sql id="table_tag_column">
+        T.ID T_ID, T.NAME T_NAME, T.DESCRIPTION T_DESCRIPTION, T.PARENT_ID T_PARENT_ID, T.STATE T_STATE, T.CREATE_USER_ID T_CREATE_USER_ID, T.CREATE_USER_NAME T_CREATE_USER_NAME, T.CREATE_DATE T_CREATE_DATE
+    </sql>
+
+    <sql id="table_picture">picture</sql>
+    <sql id="table_picture_column">
+        P.ID P_ID, P.NAME P_NAME, P.TYPE P_TYPE, P.URL P_URL, P.BLOG_ID P_BLOG_ID, P.CREATE_USER_ID P_CREATE_USER_ID, P.CREATE_USER_NAME P_CREATE_USER_NAME, P.CREATE_DATE P_CREATE_DATE
+    </sql>
+
+    <sql id="table_comment">picture</sql>
+    <sql id="table_comment_column">
+        C.ID C_ID, C.BLOG_ID C_BLOG_ID, C.CONTENT C_CONTENT, C.REVIEWER_ID C_REVIEWER_ID, C.REVIEWER_NAME C_REVIEWER_NAME, C.CREATE_USER_ID C_CREATE_USER_ID, C.CREATE_USER_NAME C_CREATE_USER_NAME, C.CREATE_DATE C_CREATE_DATE
+    </sql>
+
+    <!--通过id查询博客-->
+    <select id="findById" resultMap="baseResultMap">
+        SELECT
+        <include refid="base_column"/>
+        FROM
+        <include refid="base_table"/>
+        AS RDB
+        WHERE RDB.ID=#{id}
+    </select>
+
+    <!--创建博客-->
+    <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.work.blogblog.entity.Blog">
+        <selectKey order="BEFORE" resultType="java.lang.String" keyProperty="id">
+            SELECT UUID()
+        </selectKey>
+        INSERT INTO
+        <include refid="base_table"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            ID,
+            <if test="title != null">
+                TITLE,
+            </if>
+            <if test="content != null">
+                CONTENT,
+            </if>
+            <if test="state != null">
+                `STATE`,
+            </if>
+            <if test="createUserId != null">
+                CREATE_USER_ID,
+            </if>
+            <if test="createUserName != null">
+                CREATE_USER_NAME,
+            </if>
+            CREATE_DATE,
+            REVISION,
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <choose>
+                <when test="id != null">
+                    #{id},
+                </when>
+                <otherwise>
+                    UUID(),
+                </otherwise>
+            </choose>
+            <if test="title != null">
+                #{title},
+            </if>
+            <if test="content != null">
+                #{content},
+            </if>
+            <if test="state != null">
+                #{state},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName},
+            </if>
+            NOW(),
+            #{revision},
+        </trim>
+    </insert>
+
+    <!--通过id更新博客-->
+    <update id="update" parameterType="com.work.blogblog.entity.Blog">
+
+    </update>
+
+    <!--通过id删除博客-->
+    <delete id="delete" parameterType="java.lang.String">
+
+    </delete>
+
+    <!--通过id查询博客-->
+    <select id="select" resultMap="baseResultMap" parameterType="java.lang.String">
+        SELECT
+        <include refid="base_column"/>
+        , <include refid="table_special_column_column"/>
+        , <include refid="table_tag_column"/>
+        , <include refid="table_picture_column"/>
+        , <include refid="table_comment_column"/>
+        FROM blog RDB
+        JOIN blog_special_column_rel BSC ON RDB.ID=BSC.BLOG_ID
+        LEFT JOIN special_column SC ON BSC.SPECIAL_COLUMN_ID=SC.ID
+        JOIN blog_tag_rel BT ON RDB.ID=BT.BLOG_ID
+        LEFT JOIN tag T ON T.ID IN (BT.TAG_ID)
+        LEFT JOIN picture P ON RDB.ID=P.BLOG_ID
+        LEFT JOIN comment C ON RDB.ID=C.BLOG_ID
+        WHERE RDB.ID=#{id};
+    </select>
+</mapper>
