@@ -4,29 +4,37 @@ import com.work.blogcommon.constant.BusinessConstant;
 import com.work.blogcommon.entity.AbstractEntity;
 
 /**
- * SpecialColumn(专栏)定义类
+ * Link(链接)定义类
  *
  * @author zhouxiaofa
- * @date 2022/10/10 13:32
+ * @date 2022/10/18 23:19
  */
-public class SpecialColumn extends AbstractEntity {
+public class Link extends AbstractEntity {
 
     /**
      * 主键ID
      */
     private String id;
     /**
-     * 专栏名称
+     * 链接名称
      */
     private String name;
     /**
-     * 专栏描述
+     * 链接地址
      */
-    private String description;
+    private String url;
+    /**
+     * 相对位置编号
+     */
+    private int locationId;
     /**
      * 是否可用状态
      */
     private BusinessConstant.StateType state;
+    /**
+     * 所属博客主键ID
+     */
+    private String blogId;
 
     public String getId() {
         return id;
@@ -44,12 +52,20 @@ public class SpecialColumn extends AbstractEntity {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getUrl() {
+        return url;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
     }
 
     public BusinessConstant.StateType getState() {
@@ -58,5 +74,13 @@ public class SpecialColumn extends AbstractEntity {
 
     public void setState(BusinessConstant.StateType state) {
         this.state = state;
+    }
+
+    public String getBlogId() {
+        return blogId;
+    }
+
+    public void setBlogId(String blogId) {
+        this.blogId = blogId;
     }
 }

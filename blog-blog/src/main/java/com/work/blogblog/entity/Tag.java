@@ -1,6 +1,9 @@
 package com.work.blogblog.entity;
 
+import com.work.blogcommon.constant.BusinessConstant;
 import com.work.blogcommon.entity.AbstractEntity;
+
+import java.util.List;
 
 /**
  * tag(标签)定义类
@@ -23,13 +26,17 @@ public class Tag extends AbstractEntity {
      */
     private String description;
     /**
-     * 标签父ID
-     */
-    private String parentId;
-    /**
      * 是否可用状态
      */
-    private String state;
+    private BusinessConstant.StateType state;
+    /**
+     * 父标签(最多三级标签)
+     */
+    private Tag parent;
+    /**
+     * 子标签列表(最多三级标签)
+     */
+    private List<Tag> sonList;
 
     public String getId() {
         return id;
@@ -55,19 +62,27 @@ public class Tag extends AbstractEntity {
         this.description = description;
     }
 
-    public String getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
-    }
-
-    public String getState() {
+    public BusinessConstant.StateType getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(BusinessConstant.StateType state) {
         this.state = state;
+    }
+
+    public Tag getParent() {
+        return parent;
+    }
+
+    public void setParent(Tag parent) {
+        this.parent = parent;
+    }
+
+    public List<Tag> getSonList() {
+        return sonList;
+    }
+
+    public void setSonList(List<Tag> sonList) {
+        this.sonList = sonList;
     }
 }

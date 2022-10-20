@@ -4,7 +4,7 @@
 
     <resultMap id="baseResultMap" type="com.work.blogblog.entity.Picture">
         <id column="ID" property="id" jdbcType="VARCHAR"></id>
-        <result column="NAME" property="name" jdbcType="VARCHAR"></result>
+        <result column="NAME" property="name" jdbcType="VARCHAR" typeHandler="com.work.blogcommon.tools.EncryptionUtil"></result>
         <result column="TYPE" property="type" jdbcType="VARCHAR"></result>
         <result column="URL" property="url" jdbcType="VARCHAR"></result>
         <result column="BLOG_ID" property="blogId" jdbcType="VARCHAR"></result>
@@ -34,13 +34,13 @@
         <include refid="base_table"/>
         <trim prefix="(" suffix=")" suffixOverrides=",">
             ID,
-            <if test="pictureName != null">
+            <if test="name != null">
                 `NAME`,
             </if>
-            <if test="pictureType != null">
+            <if test="type != null">
                 `TYPE`,
             </if>
-            <if test="pictureUrl != null">
+            <if test="url != null">
                 URL,
             </if>
             <if test="blogId != null">
@@ -64,14 +64,14 @@
                     UUID(),
                 </otherwise>
             </choose>
-            <if test="pictureName != null">
-                #{pictureName},
+            <if test="name != null">
+                #{name, typeHandler=com.work.blogcommon.tools.EncryptionUtil},
             </if>
-            <if test="pictureType != null">
-                #{pictureType},
+            <if test="type != null">
+                #{type},
             </if>
-            <if test="pictureUrl != null">
-                #{pictureUrl},
+            <if test="url != null">
+                #{url},
             </if>
             <if test="blogId != null">
                 #{blogId},
