@@ -23,4 +23,9 @@ public class PictureServiceImpl implements PictureService {
     public void insert(Picture picture) {
         pictureMapper.insert(picture);
     }
+
+    @Override
+    public Picture find(String id) {
+        return pictureMapper.findById(id);
+    }
 }

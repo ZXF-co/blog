@@ -1,5 +1,6 @@
 package com.work.blogblog.entity;
 
+import com.work.blogcommon.constant.BusinessConstant;
 import com.work.blogcommon.entity.AbstractEntity;
 
 /**
@@ -27,7 +28,15 @@ public class Picture extends AbstractEntity {
      */
     private String url;
     /**
-     * 所属Blog主键ID
+     * 相对位置编号
+     */
+    private int locationId;
+    /**
+     * 是否可用状态
+     */
+    private BusinessConstant.StateType state;
+    /**
+     * 所属博客主键ID
      */
     private String blogId;
 
@@ -61,6 +70,22 @@ public class Picture extends AbstractEntity {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
+
+    public BusinessConstant.StateType getState() {
+        return state;
+    }
+
+    public void setState(BusinessConstant.StateType state) {
+        this.state = state;
     }
 
     public String getBlogId() {

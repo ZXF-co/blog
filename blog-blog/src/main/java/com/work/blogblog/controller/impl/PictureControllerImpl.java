@@ -62,4 +62,14 @@ public class PictureControllerImpl implements PictureController {
         map.put("pictureList", pictureList);
         return map;
     }
+
+    @Override
+    public void insertOne(Picture picture) {
+        pictureService.insert(picture);
+    }
+
+    @Override
+    public Picture find(String id) {
+        return pictureService.find(id);
+    }
 }

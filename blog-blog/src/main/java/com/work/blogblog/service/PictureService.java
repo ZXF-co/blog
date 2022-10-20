@@ -16,4 +16,6 @@ public interface PictureService {
      * @param       picture-->待插入图片信息
      */
     void insert(Picture picture);
+
+    Picture find(String id);
 }
