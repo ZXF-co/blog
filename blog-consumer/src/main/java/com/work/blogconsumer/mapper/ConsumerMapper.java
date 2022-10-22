@@ -11,6 +11,14 @@ import com.work.blogconsumer.entity.Consumer;
 public interface ConsumerMapper {
 
     /**
+     * 通过ID查询Consumer
+     *
+     * @param       id-->Consumer主键ID
+     * @return      查询到的Consumer
+     */
+    Consumer findById(String id);
+
+    /**
      * 创建consumer
      *
      * @param       consumer-->待创建consumer
@@ -19,10 +27,11 @@ public interface ConsumerMapper {
     void insertConsumer(Consumer consumer);
 
     /**
-     * 通过ID查询Consumer
+     * 通过name和password查询用户
      *
-     * @param       id-->Consumer主键ID
-     * @return      查询到的Consumer
+     * @param       account-->待查询用户账号
+     * @param       password-->待查询用户密码
+     * @return      查询到的用户
      */
-    Consumer findById(String id);
+    Consumer login(String account, String password);
 }

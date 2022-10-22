@@ -26,6 +26,11 @@ public class ConsumerServiceImpl implements ConsumerService {
     }
 
     @Override
+    public Consumer login(String account, String password) {
+        return consumerMapper.login(account, password);
+    }
+
+    @Override
     public Consumer find(String id) {
         return consumerMapper.findById(id);
     }
