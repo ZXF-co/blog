@@ -6,16 +6,20 @@
         <id column="ID" property="id" jdbcType="VARCHAR"></id>
         <result column="NAME" property="name" jdbcType="VARCHAR"></result>
         <result column="DESCRIPTION" property="description" jdbcType="VARCHAR"></result>
-        <result column="PARENT_ID" property="parentId" jdbcType="VARCHAR"></result>
+        <result column="PARENT_ID" property="parent.id" jdbcType="VARCHAR"></result>
         <result column="STATE" property="state" jdbcType="VARCHAR"></result>
         <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR"></result>
+        <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR"></result>
         <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"></result>
+        <result column="UPDATE_USER_NAME" property="updateUserName" jdbcType="VARCHAR"></result>
         <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"></result>
+        <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP"></result>
+        <result column="REVISION" property="revision" jdbcType="INTEGER"></result>
     </resultMap>
 
     <sql id="base_table">tag</sql>
     <sql id="base_column">
-        RDB.ID, RDB.`NAME`, RDB.DESCRIPTION, RDB.PARENT_ID, RDB.`STATE`, RDB.CREATE_USER_ID, RDB.CREATE_USER_NAME, RDB.CREATE_DATE
+        RDB.ID, RDB.`NAME`, RDB.DESCRIPTION, RDB.PARENT_ID, RDB.`STATE`, RDB.CREATE_USER_ID, RDB.UPDATE_USER_ID, RDB.CREATE_USER_NAME, RDB.UPDATE_USER_NAME, RDB.CREATE_DATE, RDB.UPDATE_DATE, RDB.REVISION
     </sql>
 
     <!--通过id查询tag-->
@@ -29,7 +33,83 @@
     </select>
 
     <!--创建tag-->
-    <insert id="insert">
+    <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.work.blogblog.entity.Tag">
+        <selectKey order="BEFORE" resultType="java.lang.String" keyProperty="id">
+            SELECT UUID()
+        </selectKey>
+        INSERT INTO
+        <include refid="base_table"/>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            ID,
+            <if test="name != null">
+                `NAME`,
+            </if>
+            <if test="description != null">
+                DESCRIPTION,
+            </if>
+            <if test="parent != null">
+                <if test="parent.id != null">
+                    `PARENT_ID`,
+                </if>
+            </if>
+            <if test="state != null">
+                `STATE`,
+            </if>
+            <if test="createUserId != null">
+                CREATE_USER_ID,
+            </if>
+            <if test="updateUserId != null">
+                UPDATE_USER_ID,
+            </if>
+            <if test="createUserName != null">
+                CREATE_USER_NAME,
+            </if>
+            <if test="updateUserName != null">
+                UPDATE_USER_NAME,
+            </if>
+            CREATE_DATE,
+            UPDATE_DATE,
+            REVISION,
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <choose>
+                <when test="id != null">
+                    #{id},
+                </when>
+                <otherwise>
+                    UUID(),
+                </otherwise>
+            </choose>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="description != null">
+                #{description},
+            </if>
+            <if test="parent != null">
+                <if test="parent.id != null">
+                    #{parent.id},
+                </if>
+            </if>
+            <if test="state != null">
+                #{state},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName},
+            </if>
+            <if test="updateUserName != null">
+                #{updateUserName},
+            </if>
+            NOW(),
+            NOW(),
+            #{revision},
+        </trim>
 
     </insert>
 

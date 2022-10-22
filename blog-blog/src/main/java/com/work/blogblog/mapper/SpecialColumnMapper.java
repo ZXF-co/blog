@@ -1,6 +1,9 @@
 package com.work.blogblog.mapper;
 
 import com.work.blogblog.entity.SpecialColumn;
+import com.work.blogblog.query.impl.SpecialColumnQueryImpl;
+
+import java.util.List;
 
 /**
  * SpecialColumn接口定义类
@@ -38,4 +41,11 @@ public interface SpecialColumnMapper {
      * @param       id-->待删除专栏ID
      */
     void delete(String id);
+
+    /**
+     * 条件查询对应专栏列表
+     * @param       specialColumnQuery-->查询条件
+     * @return      查询到的专栏列表
+     */
+    List<SpecialColumn> findList(SpecialColumnQueryImpl specialColumnQuery);
 }

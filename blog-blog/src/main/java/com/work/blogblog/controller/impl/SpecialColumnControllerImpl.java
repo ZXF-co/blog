@@ -49,6 +49,7 @@ public class SpecialColumnControllerImpl implements SpecialColumnController {
 
     @Override
     public List<SpecialColumn> findList(String createUserId) {
-        return null;
+        List<SpecialColumn> specialColumnList = specialColumnService.findList(createUserId);
+        return specialColumnList;
     }
 }

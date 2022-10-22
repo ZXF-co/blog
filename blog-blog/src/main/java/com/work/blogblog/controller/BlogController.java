@@ -19,6 +19,17 @@ import java.util.List;
 public interface BlogController {
 
     /**
+     * 创建blog
+     *
+     * @param       blog-->待创建blog
+     * @return      创建之后的blog
+     */
+    @ApiOperation("创建blog")
+    @PostMapping(value = "/blog")
+    Blog insert(@RequestBody Blog blog);
+
+
+    /**
      * 根据创建人ID查询其创建的tags
      *
      * @param       createUserId-->创建人ID
@@ -37,14 +48,4 @@ public interface BlogController {
     @ApiOperation("通过blogId查询对应的blog信息")
     @GetMapping(value = "/{blogId}")
     Blog select(@PathVariable("blogId") String blogId);
-
-    /**
-     * 创建blog
-     *
-     * @param       blog-->待创建的blog
-     * @return      创建之后的blog
-     */
-    @ApiOperation("创建blog")
-    @PostMapping(value = "/blog")
-    Blog insert(@RequestBody Blog blog);
 }

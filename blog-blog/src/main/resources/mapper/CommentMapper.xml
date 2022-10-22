@@ -9,13 +9,17 @@
         <result column="REVIEWER_ID" property="reviewerId" jdbcType="VARCHAR"></result>
         <result column="REVIEWER_NAME" property="reviewerName" jdbcType="VARCHAR"></result>
         <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR"></result>
+        <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR"></result>
         <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"></result>
+        <result column="UPDATE_USER_NAME" property="updateUserName" jdbcType="VARCHAR"></result>
         <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"></result>
+        <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP"></result>
+        <result column="REVISION" property="revision" jdbcType="INTEGER"></result>
     </resultMap>
 
     <sql id="base_table">comment</sql>
     <sql id="base_column">
-        RDB.ID, RDB.BLOG_ID, RDB.CONTENT, RDB,REVIEWER_ID, RDB.REVIEWER_NAME, RDB.CREATE_USER_ID, RDB.CREATE_USER_NAME, RDB.CREATE_DATE
+        RDB.ID, RDB.BLOG_ID, RDB.CONTENT, RDB,REVIEWER_ID, RDB.REVIEWER_NAME, RDB.CREATE_USER_ID, RDB.UPDATE_USER_ID, RDB.CREATE_USER_NAME, RDB.UPDATE_USER_NAME, RDB.CREATE_DATE, RDB.UPDATE_DATE, RDB.REVISION
     </sql>
 
     <!--通过id查询评论-->
@@ -52,10 +56,17 @@
             <if test="createUserId != null">
                 CREATE_USER_ID,
             </if>
+            <if test="updateUserId != null">
+                UPDATE_USER_ID,
+            </if>
             <if test="createUserName != null">
                 CREATE_USER_NAME,
             </if>
+            <if test="updateUserName != null">
+                UPDATE_USER_NAME,
+            </if>
             CREATE_DATE,
+            UPDATE_DATE,
             REVISION,
         </trim>
         <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
@@ -82,9 +93,16 @@
             <if test="createUserId != null">
                 #{createUserId},
             </if>
+            <if test="updateUserId != null">
+                #{updateUserId},
+            </if>
             <if test="createUserName != null">
                 #{createUserName},
             </if>
+            <if test="updateUserName != null">
+                #{updateUserName},
+            </if>
+            NOW(),
             NOW(),
             #{revision},
         </trim>
