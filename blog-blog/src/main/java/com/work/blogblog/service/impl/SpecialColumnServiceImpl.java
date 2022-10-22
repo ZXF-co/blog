@@ -3,7 +3,7 @@ package com.work.blogblog.service.impl;
 import com.work.blogblog.entity.SpecialColumn;
 import com.work.blogblog.mapper.SpecialColumnMapper;
 import com.work.blogblog.query.SpecialColumnQuery;
-import com.work.blogblog.query.SpecialColumnQueryImpl;
+import com.work.blogblog.query.impl.SpecialColumnQueryImpl;
 import com.work.blogblog.service.SpecialColumnService;
 import org.springframework.stereotype.Service;
 
@@ -44,8 +44,9 @@ public class SpecialColumnServiceImpl implements SpecialColumnService {
 
     @Override
     public List<SpecialColumn> findList(String createUserId) {
-        SpecialColumnQuery specialColumnQuery = new SpecialColumnQueryImpl();
+        SpecialColumnQueryImpl specialColumnQuery = new SpecialColumnQueryImpl();
         specialColumnQuery.createUserId(createUserId);
-        return null;
+        List<SpecialColumn> specialColumnList = specialColumnMapper.findList(specialColumnQuery);
+        return specialColumnList;
     }
 }

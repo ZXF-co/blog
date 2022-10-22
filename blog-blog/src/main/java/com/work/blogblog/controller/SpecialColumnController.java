@@ -54,6 +54,6 @@ public interface SpecialColumnController {
      * @return      查询到的专栏列表
      */
     @ApiOperation(value = "查询专栏列表接口")
-    @DeleteMapping(value = "/specialColumns/{createUserId}")
+    @GetMapping(value = "/specialColumns/{createUserId}")
     List<SpecialColumn> findList(@PathVariable("createUserId") String createUserId);
 }

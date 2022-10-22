@@ -21,6 +21,26 @@ public class TagServiceImpl implements TagService {
     private TagMapper tagMapper;
 
     @Override
+    public Tag findById(String id) {
+        return tagMapper.findById(id);
+    }
+
+    @Override
+    public void insert(Tag tag) {
+        tagMapper.insert(tag);
+    }
+
+    @Override
+    public void update(Tag tag) {
+        tagMapper.update(tag);
+    }
+
+    @Override
+    public void delete(String id) {
+        tagMapper.delete(id);
+    }
+
+    @Override
     public List<Tag> findTagList(String createUserId) {
         return tagMapper.findTagList(createUserId);
     }

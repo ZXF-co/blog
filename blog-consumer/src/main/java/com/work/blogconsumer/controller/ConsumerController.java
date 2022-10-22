@@ -5,6 +5,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * Consumer接口定义类
  *
@@ -14,6 +16,16 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "用户模块接口")
 @RequestMapping(value = "/v1/consumer")
 public interface ConsumerController {
+
+    /**
+     * 用户登录验证
+     *
+     * @param       consumer-->待验证登录用户
+     * @return      获取用户登录token
+     */
+    @ApiOperation("验证用户登录,获取token")
+    @GetMapping(value = "/login")
+    Map<String, Object> login(Consumer consumer);
 
     /**
      * 创建consumer

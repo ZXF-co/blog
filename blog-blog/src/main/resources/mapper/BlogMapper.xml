@@ -8,8 +8,12 @@
         <result column="CONTENT" property="content" jdbcType="VARCHAR"></result>
         <result column="STATE" property="state" jdbcType="VARCHAR"></result>
         <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR"></result>
+        <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR"></result>
         <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"></result>
+        <result column="UPDATE_USER_NAME" property="updateUserName" jdbcType="VARCHAR"></result>
         <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"></result>
+        <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP"></result>
+        <result column="REVISION" property="revision" jdbcType="INTEGER"></result>
 
         <association property="specialColumn" javaType="com.work.blogblog.entity.SpecialColumn">
             <id column="SC_ID" property="id" jdbcType="VARCHAR"></id>
@@ -17,19 +21,27 @@
             <result column="SC_DESCRIPTION" property="description" jdbcType="VARCHAR"></result>
             <result column="SC_STATE" property="state" jdbcType="VARCHAR"></result>
             <result column="SC_CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR"></result>
+            <result column="SC_UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR"></result>
             <result column="SC_CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"></result>
+            <result column="SC_UPDATE_USER_NAME" property="updateUserName" jdbcType="VARCHAR"></result>
             <result column="SC_CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"></result>
+            <result column="SC_UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP"></result>
+            <result column="SC_REVISION" property="revision" jdbcType="INTEGER"></result>
         </association>
 
         <collection property="tags" ofType="com.work.blogblog.entity.Tag">
             <id column="T_ID" property="id" jdbcType="VARCHAR"></id>
             <result column="T_NAME" property="name" jdbcType="VARCHAR"></result>
             <result column="T_DESCRIPTION" property="description" jdbcType="VARCHAR"></result>
-            <result column="T_PARENT_ID" property="parentId" jdbcType="VARCHAR"></result>
+            <result column="T_PARENT_ID" property="parent.id" jdbcType="VARCHAR"></result>
             <result column="T_STATE" property="state" jdbcType="VARCHAR"></result>
             <result column="T_CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR"></result>
+            <result column="T_UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR"></result>
             <result column="T_CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"></result>
+            <result column="T_UPDATE_USER_NAME" property="updateUserName" jdbcType="VARCHAR"></result>
             <result column="T_CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"></result>
+            <result column="T_UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP"></result>
+            <result column="T_REVISION" property="revision" jdbcType="INTEGER"></result>
         </collection>
 
         <collection property="pictures" ofType="com.work.blogblog.entity.Picture">
@@ -39,8 +51,12 @@
             <result column="P_URL" property="url" jdbcType="VARCHAR"></result>
             <result column="P_BLOG_ID" property="blogId" jdbcType="VARCHAR"></result>
             <result column="P_CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR"></result>
+            <result column="P_UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR"></result>
             <result column="P_CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"></result>
+            <result column="P_UPDATE_USER_NAME" property="updateUserName" jdbcType="VARCHAR"></result>
             <result column="P_CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"></result>
+            <result column="P_UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP"></result>
+            <result column="P_REVISION" property="revision" jdbcType="INTEGER"></result>
         </collection>
 
         <collection property="comments" ofType="com.work.blogblog.entity.Comment">
@@ -50,34 +66,42 @@
             <result column="C_REVIEWER_ID" property="reviewerId" jdbcType="VARCHAR"></result>
             <result column="C_REVIEWER_NAME" property="reviewerName" jdbcType="VARCHAR"></result>
             <result column="C_CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR"></result>
+            <result column="C_UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR"></result>
             <result column="C_CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"></result>
+            <result column="C_UPDATE_USER_NAME" property="updateUserName" jdbcType="VARCHAR"></result>
             <result column="C_CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"></result>
+            <result column="C_UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP"></result>
+            <result column="C_REVISION" property="revision" jdbcType="INTEGER"></result>
         </collection>
     </resultMap>
 
     <sql id="base_table">blog</sql>
     <sql id="base_column">
-        RDB.ID, RDB.TITLE, RDB.CONTENT, RDB.STATE, RDB.CREATE_USER_ID, RDB.CREATE_USER_NAME, RDB.CREATE_DATE
+        RDB.ID, RDB.TITLE, RDB.CONTENT, RDB.STATE, RDB.CREATE_USER_ID, RDB.UPDATE_USER_ID, RDB.CREATE_USER_NAME, RDB.UPDATE_USER_NAME, RDB.CREATE_DATE, RDB.UPDATE_DATE, RDB.REVISION
     </sql>
 
     <sql id="table_special_column">special_column</sql>
     <sql id="table_special_column_column">
-        SC.ID SC_ID, SC.NAME SC_NAME, SC.DESCRIPTION SC_DESCRIPTION, SC.STATE SC_STATE, SC.CREATE_USER_ID SC_CREATE_USER_ID, SC.CREATE_USER_NAME SC_CREATE_USER_NAME, SC.CREATE_DATE SC_CREATE_DATE
+        SC.ID SC_ID, SC.NAME SC_NAME, SC.DESCRIPTION SC_DESCRIPTION, SC.STATE SC_STATE, SC.CREATE_USER_ID SC_CREATE_USER_ID, SC.UPDATE_USER_ID SC_UPDATE_USER_ID, SC.CREATE_USER_NAME SC_CREATE_USER_NAME,
+        SC.UPDATE_USER_NAME SC_UPDATE_USER_NAME, SC.CREATE_DATE SC_CREATE_DATE, SC.UPDATE_DATE SC_UPDATE_DATE, SC.REVISON SC_REVISION
     </sql>
 
     <sql id="table_tag">tag</sql>
     <sql id="table_tag_column">
-        T.ID T_ID, T.NAME T_NAME, T.DESCRIPTION T_DESCRIPTION, T.PARENT_ID T_PARENT_ID, T.STATE T_STATE, T.CREATE_USER_ID T_CREATE_USER_ID, T.CREATE_USER_NAME T_CREATE_USER_NAME, T.CREATE_DATE T_CREATE_DATE
+        T.ID T_ID, T.NAME T_NAME, T.DESCRIPTION T_DESCRIPTION, T.PARENT_ID T_PARENT_ID, T.STATE T_STATE, T.CREATE_USER_ID T_CREATE_USER_ID, T.UPDATE_USER_ID T_UPDATE_USER_ID,  T.CREATE_USER_NAME T_CREATE_USER_NAME,
+        T.UPDATE_USER_NAME T_UPDATE_USER_NAME, T.CREATE_DATE T_CREATE_DATE, T.UPDATE_DATE T_UPDATE_DATE, T.REVISION T_REVISION
     </sql>
 
     <sql id="table_picture">picture</sql>
     <sql id="table_picture_column">
-        P.ID P_ID, P.NAME P_NAME, P.TYPE P_TYPE, P.URL P_URL, P.BLOG_ID P_BLOG_ID, P.CREATE_USER_ID P_CREATE_USER_ID, P.CREATE_USER_NAME P_CREATE_USER_NAME, P.CREATE_DATE P_CREATE_DATE
+        P.ID P_ID, P.NAME P_NAME, P.TYPE P_TYPE, P.URL P_URL, P.BLOG_ID P_BLOG_ID, P.CREATE_USER_ID P_CREATE_USER_ID, P.UPDATE_USER_ID P_UPDATE_USER_ID, P.CREATE_USER_NAME P_CREATE_USER_NAME, P.UPDATE_USER_NAME P_UPDATE_USER_NAME,
+        P.CREATE_DATE P_CREATE_DATE, P.UPDATE_DATE P_UPDATE, P.REVISION P_REVISION
     </sql>
 
     <sql id="table_comment">picture</sql>
     <sql id="table_comment_column">
-        C.ID C_ID, C.BLOG_ID C_BLOG_ID, C.CONTENT C_CONTENT, C.REVIEWER_ID C_REVIEWER_ID, C.REVIEWER_NAME C_REVIEWER_NAME, C.CREATE_USER_ID C_CREATE_USER_ID, C.CREATE_USER_NAME C_CREATE_USER_NAME, C.CREATE_DATE C_CREATE_DATE
+        C.ID C_ID, C.BLOG_ID C_BLOG_ID, C.CONTENT C_CONTENT, C.REVIEWER_ID C_REVIEWER_ID, C.REVIEWER_NAME C_REVIEWER_NAME, C.CREATE_USER_ID C_CREATE_USER_ID, C.UPDATE_USER_ID C_UPDATE_USER_ID, C.CREATE_USER_NAME C_CREATE_USER_NAME,
+        C.UPDATE_USER_NAME C_UPDATE_USER_NAME, C.CREATE_DATE C_CREATE_DATE, C.UPDATE_DATE C_UPDATE_DATE, C.REVISON C_REVISION
     </sql>
 
     <!--通过id查询博客-->
@@ -111,10 +135,17 @@
             <if test="createUserId != null">
                 CREATE_USER_ID,
             </if>
+            <if test="updateUserId != null">
+                UPDATE_USER_ID,
+            </if>
             <if test="createUserName != null">
                 CREATE_USER_NAME,
             </if>
+            <if test="updateUserName != null">
+                UPDATE_USER_NAME,
+            </if>
             CREATE_DATE,
+            UPDATE_DATE,
             REVISION,
         </trim>
         <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
@@ -138,9 +169,16 @@
             <if test="createUserId != null">
                 #{createUserId},
             </if>
+            <if test="updateUserId != null">
+                #{updateUserId},
+            </if>
             <if test="createUserName != null">
                 #{createUserName},
             </if>
+            <if test="updateUserName != null">
+                #{updateUserName},
+            </if>
+            NOW(),
             NOW(),
             #{revision},
         </trim>

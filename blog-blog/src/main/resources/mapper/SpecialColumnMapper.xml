@@ -7,13 +7,17 @@
         <result column="DESCRIPTION" property="description" jdbcType="VARCHAR"></result>
         <result column="STATE" property="state" jdbcType="VARCHAR"></result>
         <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR"></result>
+        <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR"></result>
         <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"></result>
+        <result column="UPDATE_USER_NAME" property="updateUserName" jdbcType="VARCHAR"></result>
         <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"></result>
+        <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP"></result>
+        <result column="REVISION" property="revision" jdbcType="INTEGER"></result>
     </resultMap>
 
     <sql id="base_table">special_column</sql>
     <sql id="base_column">
-        RDB.ID, RDB.NAME, RDB.DESCRIPTION, RDB.STATE, RDB.CREATE_USER_ID, RDB.CREATE_USER_NAME, RDB.CREATE_DATE
+        RDB.ID, RDB.NAME, RDB.DESCRIPTION, RDB.STATE, RDB.CREATE_USER_ID, RDB.UPDATE_USER_ID, RDB.CREATE_USER_NAME, RDB.UPDATE_USER_NAME, RDB.CREATE_DATE, RDB.UPDATE_DATE, RDB.REVISION
     </sql>
 
     <!--通过id查询专栏-->
@@ -47,10 +51,17 @@
             <if test="createUserId != null">
                 CREATE_USER_ID,
             </if>
+            <if test="updateUserId != null">
+                UPDATE_USER_ID,
+            </if>
             <if test="createUserName != null">
                 CREATE_USER_NAME,
             </if>
+            <if test="updateUserName != null">
+                UPDATE_USER_NAME,
+            </if>
             CREATE_DATE,
+            UPDATE_DATE,
             REVISION,
         </trim>
         <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
@@ -74,9 +85,16 @@
             <if test="createUserId != null">
                 #{createUserId},
             </if>
+            <if test="updateUserId != null">
+                #{updateUserId},
+            </if>
             <if test="createUserName != null">
                 #{createUserName},
             </if>
+            <if test="updateUserName != null">
+                #{updateUserName},
+            </if>
+            NOW(),
             NOW(),
             #{revision},
         </trim>
@@ -91,4 +109,19 @@
     <delete id="delete">
 
     </delete>
+
+    <!--条件查询专栏列表-->
+    <select id="findList" resultMap="baseResultMap" parameterType="com.work.blogblog.query.impl.SpecialColumnQueryImpl">
+        SELECT
+        <include refid="base_column"/>
+        FROM
+        <include refid="base_table"/> AS RDB
+        WHERE 1=1
+        <if test="id != null">
+            AND RDB.ID=#{id}
+        </if>
+        <if test="createUserId != null">
+            AND RDB.CREATE_USER_ID=#{createUserId}
+        </if>
+    </select>
 </mapper>

@@ -11,18 +11,27 @@ import com.work.blogconsumer.entity.Consumer;
 public interface ConsumerService {
 
     /**
-     * 创建consumer
+     * 通过ID查询用户
      *
-     * @param       consumer-->待创建consumer
-     * @return      创建的consumer
+     * @param       id-->用户主键ID
+     * @return      查询到的用户
+     */
+    Consumer find(String id);
+
+    /**
+     * 创建用户
+     *
+     * @param       consumer-->待创建用户
+     * @return      创建的用户
      */
     Consumer create(Consumer consumer);
 
     /**
-     * 通过ID查询Consumer
+     * 通过name和password查询用户
      *
-     * @param       id-->Consumer主键ID
-     * @return      查询到的Consumer
+     * @param       account-->待查询用户账号
+     * @param       password-->待查询用户密码
+     * @return      查询到的用户
      */
-    Consumer find(String id);
+    Consumer login(String account, String password);
 }

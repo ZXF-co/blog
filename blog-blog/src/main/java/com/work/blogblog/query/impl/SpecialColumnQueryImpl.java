@@ -1,4 +1,6 @@
-package com.work.blogblog.query;
+package com.work.blogblog.query.impl;
+
+import com.work.blogblog.query.SpecialColumnQuery;
 
 /**
  * SpecialColumn查询定义实现类
@@ -6,7 +8,7 @@ package com.work.blogblog.query;
  * @author zhouxiaofa
  * @date 2022/10/19 13:50
  */
-public class SpecialColumnQueryImpl implements SpecialColumnQuery{
+public class SpecialColumnQueryImpl implements SpecialColumnQuery {
 
     /**
      * 专栏ID

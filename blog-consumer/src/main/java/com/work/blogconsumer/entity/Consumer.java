@@ -2,6 +2,8 @@ package com.work.blogconsumer.entity;
 
 import com.work.blogcommon.entity.AbstractEntity;
 
+import java.util.List;
+
 /**
  * Consumer定义类
  *
@@ -42,6 +44,10 @@ public class Consumer extends AbstractEntity {
      * 是否可用状态
      */
     private String state;
+    /**
+     * 关注列表
+     */
+    private List<Follower> followers;
 
     public String getId() {
         return id;
@@ -105,5 +111,13 @@ public class Consumer extends AbstractEntity {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public List<Follower> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<Follower> followers) {
+        this.followers = followers;
     }
 }
