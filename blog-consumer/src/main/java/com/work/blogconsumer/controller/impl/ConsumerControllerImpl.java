@@ -1,9 +1,10 @@
 package com.work.blogconsumer.controller.impl;
 
-import com.work.blogcommon.tools.TokenUtil;
 import com.work.blogconsumer.controller.ConsumerController;
 import com.work.blogconsumer.entity.Consumer;
+import com.work.blogconsumer.entity.UserManager;
 import com.work.blogconsumer.service.ConsumerService;
+import com.work.blogconsumer.tools.TokenUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +23,8 @@ public class ConsumerControllerImpl implements ConsumerController {
 
     @Resource
     private ConsumerService consumerService;
+    @Resource
+    private UserManager userManager;
 
     @Override
     public Map<String, Object> login(Consumer consumer) {
@@ -44,11 +47,17 @@ public class ConsumerControllerImpl implements ConsumerController {
 
     @Override
     public Consumer create(Consumer consumer) {
+        userManager.setCreateInfo(consumer);
         return consumerService.create(consumer);
     }
 
     @Override
     public Consumer find(String id) {
         return consumerService.find(id);
+    }
+
+    @Override
+    public Object test() {
+        return UserManager.get();
     }
 }
