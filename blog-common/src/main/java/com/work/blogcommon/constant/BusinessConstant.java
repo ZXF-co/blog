@@ -75,4 +75,55 @@ public class BusinessConstant {
             this.chineseName = chineseName;
         }
     }
+
+    /**
+     * 学校级别
+     */
+    public enum SchoolLevel {
+        PRIMARY_SCHOOL("小学"),
+        JUNIOR_HIGH_SCHOOL("初中"),
+        SENIOR_SCHOOL("高中"),
+        UNIVERSITY("大学");
+
+        private String chineseName;
+
+        SchoolLevel(String chineseName) {
+            this.chineseName = chineseName;
+        }
+
+        public String getChineseName() {
+            return chineseName;
+        }
+
+        public void setChineseName(String chineseName) {
+            this.chineseName = chineseName;
+        }
+    }
+
+    /**
+     * 教育学历
+     */
+    public enum EducationType {
+        PRIMARY("小学学历"),
+        JUNIOR_HIGH("初中学历"),
+        SENIOR("高中学历"),
+        JUNIOR_COLLEGE("专科学历"),
+        UNIVERSITY("大学本科学历"),
+        MASTER("硕士/研究生学历"),
+        DOCTOR("博士学历");
+
+        private String chineseName;
+
+        EducationType(String chineseName) {
+            this.chineseName = chineseName;
+        }
+
+        public String getChineseName() {
+            return chineseName;
+        }
+
+        public void setChineseName(String chineseName) {
+            this.chineseName = chineseName;
+        }
+    }
 }

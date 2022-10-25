@@ -139,4 +139,24 @@
         WHERE RDB.ACCOUNT=#{account} AND RDB.PASSWORD=#{password}
 
     </select>
+
+    <!--创建用户教育信息-->
+    <insert id="insertEducationInfo">
+
+    </insert>
+
+    <!--移除用户教育信息-->
+    <delete id="deleteEducationInfo">
+
+    </delete>
+
+    <!--创建用户工作信息-->
+    <insert id="insertWorkInfo">
+
+    </insert>
+    <!--移除工作教育信息-->
+    <delete id="deleteWorkInfo">
+
+    </delete>
+
 </mapper>

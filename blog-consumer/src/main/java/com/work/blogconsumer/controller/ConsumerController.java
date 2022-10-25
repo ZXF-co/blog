@@ -46,4 +46,13 @@ public interface ConsumerController {
     @ApiOperation("通过ID查询Consumer")
     @GetMapping(value = "/consumer/{id}")
     Consumer find(@PathVariable String id);
+
+    /**
+     * 测试是否能获取当前用户信息
+     *
+     * @return      当前登录用户信息
+     */
+    @ApiOperation("测试是否能获取当前用户登录信息")
+    @GetMapping(value = "/test")
+    Object test();
 }
