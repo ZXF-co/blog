@@ -78,8 +78,18 @@ public class ConsumerControllerImpl implements ConsumerController {
     }
 
     @Override
+    public Consumer update(String id, Consumer consumer) {
+        return null;
+    }
+
+    @Override
     public Consumer find(String id) {
         return consumerService.find(id);
+    }
+
+    @Override
+    public void delete(String id) {
+
     }
 
     @Override

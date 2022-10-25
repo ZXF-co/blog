@@ -48,12 +48,12 @@ public interface SpecialColumnController {
     void delete(@PathVariable("id") String id);
 
     /**
-     * 根据createUserId查询创建的专栏列表
+     * 根据createUserId查询专栏列表
      *
      * @param       createUserId-->创建人ID
      * @return      查询到的专栏列表
      */
-    @ApiOperation(value = "查询专栏列表接口")
+    @ApiOperation(value = "根据createUserId查询专栏列表接口")
     @GetMapping(value = "/specialColumns/{createUserId}")
     List<SpecialColumn> findList(@PathVariable("createUserId") String createUserId);
 }
