@@ -5,6 +5,7 @@ import com.work.blogblog.entity.Blog;
 import com.work.blogblog.entity.Comment;
 import com.work.blogblog.entity.Picture;
 import com.work.blogblog.entity.Tag;
+import com.work.blogblog.query.BlogQuery;
 import com.work.blogblog.service.*;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RestController;
@@ -79,7 +80,17 @@ public class BlogControllerImpl implements BlogController {
     }
 
     @Override
+    public void delete(String id) {
+
+    }
+
+    @Override
     public List<Blog> findList(String createUserId) {
+        return null;
+    }
+
+    @Override
+    public List<Blog> findListByCondition(BlogQuery blogQuery) {
         return null;
     }
 }

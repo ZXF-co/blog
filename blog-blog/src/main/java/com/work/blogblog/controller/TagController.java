@@ -48,12 +48,12 @@ public interface TagController {
     void delete(@PathVariable("id") String id);
 
     /**
-     * 根据createUserId查询创建的一级标签列表
+     * 根据createUserId查询标签列表
      *
      * @param       createUserId-->创建人ID
-     * @return      查询到的一级标签列表
+     * @return      查询到的标签列表
      */
-    @ApiOperation(value = "查询一级标签列表接口")
-    @DeleteMapping(value = "/tags/{createUserId}")
+    @ApiOperation(value = "根据createUserId查询标签列表接口")
+    @GetMapping(value = "/tags/{createUserId}")
     List<Tag> findList(@PathVariable("createUserId") String createUserId);
 }
