@@ -1,7 +1,6 @@
 package com.work.blogblog.controller;
 
 import com.work.blogblog.entity.Blog;
-import com.work.blogblog.entity.Tag;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -26,26 +25,36 @@ public interface BlogController {
      */
     @ApiOperation("创建blog")
     @PostMapping(value = "/blog")
-    Blog insert(@RequestBody Blog blog);
-
+    Blog create(@RequestBody Blog blog);
 
     /**
-     * 根据创建人ID查询其创建的tags
+     * 更新博客
      *
-     * @param       createUserId-->创建人ID
-     * @return      查询到的tags
+     * @param       id-->待更新博客ID
+     * @param       blog-->待更新博客
+     * @return      更新后的博客
      */
-    @ApiOperation("通过创建人ID查询对应的tags")
-    @GetMapping(value = "/tags/{createUserId}")
-    List<Tag> findTagList(@PathVariable("createUserId") String createUserId);
+    @ApiOperation("更新博客")
+    @PutMapping(value = "/blog/{id}")
+    Blog update(@PathVariable("id") String id, @RequestBody Blog blog);
 
     /**
-     * 根据blogId查询对应blog信息
+     * 根据id查询博客
      *
-     * @param       blogId-->blogId
-     * @return      查询到的blog信息
+     * @param       id-->待查询博客ID
+     * @return      查询到的博客
      */
     @ApiOperation("通过blogId查询对应的blog信息")
-    @GetMapping(value = "/{blogId}")
-    Blog select(@PathVariable("blogId") String blogId);
+    @GetMapping(value = "/blog/{id}")
+    Blog find(@PathVariable("id") String id);
+
+    /**
+     * 通过createUserId查询博客列表
+     *
+     * @param       createUserId-->创建人ID
+     * @return      查询到的博客列表
+     */
+    @ApiOperation("通过createUserId查询博客列表")
+    @GetMapping("/blogs/{createUserId}")
+    List<Blog> findList(@PathVariable("createUserId") String createUserId);
 }

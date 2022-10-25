@@ -1,4 +1,4 @@
-package com.work.blogcommon.tools;
+package com.work.blogconsumer.tools;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,7 @@ import java.util.UUID;
  * Token工具类
  *
  * @author zhouxiaofa
- * @date 2022/10/22 11:26
+ * @date 2022/10/22 15:12
  */
 public class TokenUtil {
 

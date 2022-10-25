@@ -33,7 +33,7 @@ public class BlogControllerImpl implements BlogController {
     private CommentService commentService;
 
     @Override
-    public Blog insert(Blog blog) {
+    public Blog create(Blog blog) {
         if(null == blog) {
             return null;
         }
@@ -69,14 +69,17 @@ public class BlogControllerImpl implements BlogController {
     }
 
     @Override
-    public List<Tag> findTagList(String createUserId) {
-        return tagService.findTagList(createUserId);
+    public Blog update(String id, Blog blog) {
+        return null;
     }
 
     @Override
-    public Blog select(String blogId) {
+    public Blog find(String blogId) {
         return blogService.select(blogId);
     }
 
-
+    @Override
+    public List<Blog> findList(String createUserId) {
+        return null;
+    }
 }
