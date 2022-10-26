@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.work.blogblog.mapper.EnumerationMapper">
+
+    <resultMap id="baseResultMap" type="com.work.blogblog.entity.Enumeration">
+        <id column="ID" property="id" jdbcType="VARCHAR"></id>
+        <result column="CODE" property="code" jdbcType="VARCHAR"></result>
+        <result column="NAME" property="name" jdbcType="VARCHAR"></result>
+        <result column="DESCRIPTION" property="description" jdbcType="VARCHAR"></result>
+        <result column="TYPE" property="type" jdbcType="VARCHAR"></result>
+        <result column="SOURCE" property="source" jdbcType="VARCHAR"></result>
+        <result column="STATE" property="state" jdbcType="VARCHAR"></result>
+        <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR"></result>
+        <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR"></result>
+        <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"></result>
+        <result column="UPDATE_USER_NAME" property="updateUserName" jdbcType="VARCHAR"></result>
+        <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP"></result>
+        <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP"></result>
+        <result column="REVISION" property="revision" jdbcType="INTEGER"></result>
+    </resultMap>
+
+    <select id="findById" resultMap="baseResultMap">
+
+    </select>
+
+    <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.work.blogblog.entity.Enumeration">
+        <selectKey order="BEFORE" resultType="java.lang.String" keyProperty="id">
+            SELECT UUID()
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterType="com.work.blogblog.entity.Enumeration">
+
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+
+    </delete>
+
+    <select id="findListByCondition" parameterType="com.work.blogblog.query.impl.EnumerationQueryImpl" resultMap="baseResultMap">
+
+    </select>
+
+</mapper>
